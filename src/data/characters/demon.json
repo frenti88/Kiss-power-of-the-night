@@ -1,0 +1,73 @@
+{
+  "id": "demon",
+  "name": "THE DEMON",
+  "subtitle": "God of Thunder / Heavy Power",
+  "role": "Heavy / Power",
+  "portraitColor": "#b80000",
+  "avatarUrl": "/assets/characters/avatar_demon.jpg",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "collider": {
+    "width": 26,
+    "height": 52,
+    "offsetX": 0,
+    "offsetY": -4
+  },
+  "stats": {
+    "maxHealth": 140,
+    "moveSpeed": 125,
+    "jumpForce": 290,
+    "gravity": 750,
+    "coyoteTimeMs": 110,
+    "jumpBufferMs": 130,
+    "variableJumpMultiplier": 0.5
+  },
+  "combat": {
+    "primaryWeapon": {
+      "name": "Fireball",
+      "damage": 25,
+      "speed": 280,
+      "fireRateMs": 220,
+      "piercing": false,
+      "lifetime": 1.6,
+      "color": "#ff4500"
+    },
+    "melee": {
+      "damage": 45,
+      "range": 32,
+      "width": 30,
+      "height": 40,
+      "startupFrames": [1],
+      "activeFrames": [2, 3],
+      "recoveryFrames": [4],
+      "durationMs": 300
+    },
+    "special": {
+      "name": "Fire Breath",
+      "cost": 30,
+      "damage": 65
+    },
+    "ultimate": {
+      "name": "God of Thunder",
+      "cost": 100,
+      "damage": 250,
+      "screenShake": {
+        "intensity": 9,
+        "durationMs": 700
+      }
+    }
+  },
+  "animations": {
+    "idle": { "row": 0, "frames": 6, "fps": 8, "loop": true },
+    "run": { "row": 1, "frames": 8, "fps": 12, "loop": true },
+    "jump": { "row": 2, "frames": 4, "fps": 10, "loop": false },
+    "fall": { "row": 3, "frames": 3, "fps": 10, "loop": true },
+    "crouch": { "row": 4, "frames": 3, "fps": 8, "loop": false },
+    "shoot": { "row": 5, "frames": 4, "fps": 14, "loop": false },
+    "crouch_shoot": { "row": 6, "frames": 4, "fps": 14, "loop": false },
+    "jump_shoot": { "row": 7, "frames": 4, "fps": 14, "loop": false },
+    "melee": { "row": 8, "frames": 5, "fps": 14, "loop": false },
+    "hit": { "row": 9, "frames": 3, "fps": 10, "loop": false },
+    "death": { "row": 10, "frames": 6, "fps": 8, "loop": false }
+  }
+}

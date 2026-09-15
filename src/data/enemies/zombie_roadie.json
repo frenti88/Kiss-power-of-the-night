@@ -1,0 +1,34 @@
+{
+  "id": "zombie_roadie",
+  "name": "Zombie Roadie",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "collider": {
+    "width": 24,
+    "height": 46,
+    "offsetX": 0,
+    "offsetY": -4
+  },
+  "stats": {
+    "maxHealth": 45,
+    "moveSpeed": 50,
+    "damage": 15,
+    "points": 100,
+    "patrolDistance": 90,
+    "detectionRange": 160,
+    "attackRange": 28,
+    "attackCooldownMs": 1100
+  },
+  "drops": [
+    { "type": "health_small", "chance": 0.2 },
+    { "type": "rock_power_small", "chance": 0.4 }
+  ],
+  "animations": {
+    "idle": { "row": 0, "frames": 4, "fps": 6, "loop": true },
+    "patrol": { "row": 1, "frames": 6, "fps": 8, "loop": true },
+    "chase": { "row": 1, "frames": 6, "fps": 10, "loop": true },
+    "attack": { "row": 2, "frames": 5, "fps": 10, "loop": false },
+    "hit": { "row": 3, "frames": 2, "fps": 8, "loop": false },
+    "death": { "row": 4, "frames": 5, "fps": 8, "loop": false }
+  }
+}

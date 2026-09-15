@@ -1,0 +1,73 @@
+{
+  "id": "starchild",
+  "name": "THE STARCHILD",
+  "subtitle": "Love Gun / Balanced Agility",
+  "role": "Balanced / Mobile",
+  "portraitColor": "#9932cc",
+  "avatarUrl": "/assets/characters/avatar_starchild.jpg",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "collider": {
+    "width": 24,
+    "height": 50,
+    "offsetX": 0,
+    "offsetY": -4
+  },
+  "stats": {
+    "maxHealth": 120,
+    "moveSpeed": 145,
+    "jumpForce": 305,
+    "gravity": 720,
+    "coyoteTimeMs": 120,
+    "jumpBufferMs": 140,
+    "variableJumpMultiplier": 0.45
+  },
+  "combat": {
+    "primaryWeapon": {
+      "name": "Star Shot",
+      "damage": 22,
+      "speed": 320,
+      "fireRateMs": 180,
+      "piercing": false,
+      "lifetime": 1.6,
+      "color": "#e056fd"
+    },
+    "melee": {
+      "damage": 35,
+      "range": 28,
+      "width": 28,
+      "height": 38,
+      "startupFrames": [1],
+      "activeFrames": [2, 3],
+      "recoveryFrames": [4],
+      "durationMs": 260
+    },
+    "special": {
+      "name": "Starlight Volley",
+      "cost": 30,
+      "damage": 55
+    },
+    "ultimate": {
+      "name": "Love Gun",
+      "cost": 100,
+      "damage": 230,
+      "screenShake": {
+        "intensity": 8,
+        "durationMs": 650
+      }
+    }
+  },
+  "animations": {
+    "idle": { "row": 0, "frames": 6, "fps": 8, "loop": true },
+    "run": { "row": 1, "frames": 8, "fps": 12, "loop": true },
+    "jump": { "row": 2, "frames": 4, "fps": 10, "loop": false },
+    "fall": { "row": 3, "frames": 3, "fps": 10, "loop": true },
+    "crouch": { "row": 4, "frames": 3, "fps": 8, "loop": false },
+    "shoot": { "row": 5, "frames": 4, "fps": 14, "loop": false },
+    "crouch_shoot": { "row": 6, "frames": 4, "fps": 14, "loop": false },
+    "jump_shoot": { "row": 7, "frames": 4, "fps": 14, "loop": false },
+    "melee": { "row": 8, "frames": 5, "fps": 14, "loop": false },
+    "hit": { "row": 9, "frames": 3, "fps": 10, "loop": false },
+    "death": { "row": 10, "frames": 6, "fps": 8, "loop": false }
+  }
+}
