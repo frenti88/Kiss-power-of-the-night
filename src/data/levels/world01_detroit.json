@@ -10,7 +10,7 @@
     {
       "id": "sky",
       "texture": "detroit_sky",
-      "textureUrl": "/assets/levels/detroit/detroit_bg_sky.png?v=sky_pattern_1",
+      "textureUrl": "/assets/levels/detroit/detroit_bg_sky.png?v=moon_sky_v3",
       "factorX": 0.02,
       "factorY": 0.0,
       "repeatX": true,
