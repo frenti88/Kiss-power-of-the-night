@@ -8,6 +8,7 @@ interface LayerEntry {
   mesh: THREE.Mesh;
   texture: THREE.Texture;
   texWidth: number;
+  texHeight: number;
   baseYOffset: number;
 }
 
@@ -39,6 +40,7 @@ export class ParallaxBackground {
 
     for (const cfg of configs) {
       let texWidth = 1024;
+      let texHeight = viewportHeight;
       let initialTexture: THREE.Texture;
 
       // Fallback procedural texture
@@ -48,7 +50,8 @@ export class ParallaxBackground {
       initialTexture.generateMipmaps = false;
       initialTexture.wrapS = THREE.RepeatWrapping;
       initialTexture.wrapT = THREE.ClampToEdgeWrapping;
-      initialTexture.repeat.set(viewportWidth / texWidth, 1.0);
+      const initialTileW = texWidth * (viewportHeight / texHeight);
+      initialTexture.repeat.set(viewportWidth / initialTileW, 1.0);
 
       const material = new THREE.MeshBasicMaterial({
         map: initialTexture,
@@ -69,6 +72,7 @@ export class ParallaxBackground {
         mesh,
         texture: initialTexture,
         texWidth,
+        texHeight,
         baseYOffset: cfg.yOffset || 0
       };
       this.layers.push(entry);
@@ -86,10 +90,13 @@ export class ParallaxBackground {
             loadedTex.wrapT = THREE.ClampToEdgeWrapping;
 
             const texW = loadedTex.image ? loadedTex.image.width : 1024;
+            const texH = loadedTex.image ? loadedTex.image.height : 576;
             entry.texWidth = texW;
+            entry.texHeight = texH;
 
-            // 1:1 Pixel Art Scale: 384 screen pixels across viewportWidth
-            loadedTex.repeat.set(this.viewportWidth / texW, 1.0);
+            // Maintain uniform square 16-bit pixel aspect ratio:
+            const screenTileW = texW * (this.viewportHeight / texH);
+            loadedTex.repeat.set(this.viewportWidth / screenTileW, 1.0);
             loadedTex.needsUpdate = true;
 
             material.map = loadedTex;
@@ -141,7 +148,8 @@ export class ParallaxBackground {
         scrollPixelX += riverWave;
       }
 
-      const scrollOffset = scrollPixelX / layer.texWidth;
+      const screenTileW = layer.texWidth * (this.viewportHeight / layer.texHeight);
+      const scrollOffset = screenTileW > 0 ? scrollPixelX / screenTileW : 0;
       layer.texture.offset.x = scrollOffset;
     }
   }
@@ -156,8 +164,9 @@ export class ParallaxBackground {
 
     for (const layer of this.layers) {
       layer.mesh.scale.set(this.viewportWidth, this.viewportHeight, 1);
-      if (layer.texWidth > 0) {
-        layer.texture.repeat.set(this.viewportWidth / layer.texWidth, 1.0);
+      const screenTileW = layer.texWidth * (this.viewportHeight / layer.texHeight);
+      if (screenTileW > 0) {
+        layer.texture.repeat.set(this.viewportWidth / screenTileW, 1.0);
         layer.texture.needsUpdate = true;
       }
     }
