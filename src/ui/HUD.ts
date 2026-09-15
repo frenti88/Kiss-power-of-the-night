@@ -13,8 +13,8 @@ export class HUD {
       <div id="arcade-hud" style="
         position: absolute;
         top: max(env(safe-area-inset-top, 8px), 8px);
-        left: max(env(safe-area-inset-left, 8px), 8px);
-        right: max(env(safe-area-inset-right, 8px), 8px);
+        left: max(env(safe-area-inset-left, 16px), 16px);
+        right: max(env(safe-area-inset-right, 16px), 16px);
         display: flex;
         justify-content: space-between;
         align-items: flex-start;

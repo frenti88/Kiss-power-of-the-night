@@ -39,10 +39,20 @@ export class UIManager {
     this.virtualGamepad = new VirtualGamepad(this.overlayContainer, inputManager);
     this.virtualGamepad.init();
 
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) {
+      pauseBtn.onclick = (e) => {
+        e.stopPropagation();
+        onResumeGame();
+      };
+    }
+
     this.initMusicControls();
   }
 
   public showTitle(): void {
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) pauseBtn.style.display = 'none';
     this.virtualGamepad.hide();
     this.hud.hide();
     this.pauseMenu.hide();
@@ -51,6 +61,8 @@ export class UIManager {
   }
 
   public showCharacterSelect(): void {
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) pauseBtn.style.display = 'none';
     this.virtualGamepad.hide();
     this.titleScreen.hide();
     this.hud.hide();
@@ -58,6 +70,8 @@ export class UIManager {
   }
 
   public showGameplayHUD(): void {
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) pauseBtn.style.display = 'flex';
     this.titleScreen.hide();
     this.characterSelect.hide();
     this.pauseMenu.hide();
@@ -70,16 +84,21 @@ export class UIManager {
   }
 
   public showPause(isPaused: boolean): void {
+    const pauseBtn = document.getElementById('pause-btn');
     if (isPaused) {
+      if (pauseBtn) pauseBtn.style.display = 'none';
       this.virtualGamepad.hide();
       this.pauseMenu.show();
     } else {
+      if (pauseBtn) pauseBtn.style.display = 'flex';
       this.pauseMenu.hide();
       this.virtualGamepad.show();
     }
   }
 
   public showVictoryBanner(score: number, onContinue: () => void): void {
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) pauseBtn.style.display = 'none';
     this.virtualGamepad.hide();
     const banner = document.createElement('div');
     banner.id = 'victory-banner';

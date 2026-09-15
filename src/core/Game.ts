@@ -87,6 +87,13 @@ export class Game {
       this.audioManager.toggleMusic();
     };
 
+    this.renderer.onResize = (logicalWidth: number, logicalHeight: number) => {
+      this.cameraController.onResize(logicalWidth, logicalHeight, this.levelManager?.currentLevel.worldWidth);
+      if (this.parallaxBackground) {
+        this.parallaxBackground.onResize(logicalWidth, logicalHeight);
+      }
+    };
+
     this.uiManager = new UIManager(
       this.uiOverlay,
       this.inputManager,
@@ -161,13 +168,20 @@ export class Game {
     this.cleanupCurrentLevel();
 
     const level = LevelLoader.loadLevel(levelId);
+    this.cameraController.onResize(
+      this.renderer.logicalWidth,
+      this.renderer.logicalHeight,
+      level.worldWidth
+    );
     this.cameraController.setBounds(0, level.worldWidth);
 
     // Parallax background
     this.parallaxBackground = new ParallaxBackground(
       this.renderer.scene,
       level.config.parallaxLayers,
-      this.renderer.sharedPlaneGeometry
+      this.renderer.sharedPlaneGeometry,
+      this.renderer.logicalWidth,
+      this.renderer.logicalHeight
     );
 
     // Level Manager

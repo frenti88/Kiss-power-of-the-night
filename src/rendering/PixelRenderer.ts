@@ -3,6 +3,12 @@ import * as THREE from 'three';
 export class PixelRenderer {
   public static readonly LOGICAL_WIDTH = 384;
   public static readonly LOGICAL_HEIGHT = 216;
+  public static readonly BASE_WIDTH = 384;
+  public static readonly BASE_HEIGHT = 216;
+
+  public logicalWidth: number = PixelRenderer.LOGICAL_WIDTH;
+  public logicalHeight: number = PixelRenderer.LOGICAL_HEIGHT;
+  public onResize?: (logicalWidth: number, logicalHeight: number) => void;
 
   public renderer: THREE.WebGLRenderer;
   public scene: THREE.Scene;
@@ -48,24 +54,34 @@ export class PixelRenderer {
   }
 
   public handleResize = (): void => {
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+    const windowWidth = Math.max(window.innerWidth, 1);
+    const windowHeight = Math.max(window.innerHeight, 1);
+    const aspect = windowWidth / windowHeight;
 
-    // Maintain 16:9 aspect ratio in display
-    const targetAspect = 16 / 9;
-    let displayW = windowWidth;
-    let displayH = windowWidth / targetAspect;
+    // Fullscreen-first mobile landscape cover:
+    // Maintain vertical height at 216 units so gameplay height is preserved.
+    // Width scales dynamically so pixels are 100% square and fill the entire screen edge-to-edge.
+    this.logicalHeight = PixelRenderer.BASE_HEIGHT;
+    this.logicalWidth = Math.round(this.logicalHeight * aspect);
 
-    if (displayH > windowHeight) {
-      displayH = windowHeight;
-      displayW = windowHeight * targetAspect;
+    // Update orthographic camera projection to cover the screen exactly
+    this.camera.left = 0;
+    this.camera.right = this.logicalWidth;
+    this.camera.top = this.logicalHeight;
+    this.camera.bottom = 0;
+    this.camera.updateProjectionMatrix();
+
+    // Canvas occupies 100% of the viewport with no black margins
+    this.canvas.style.width = '100%';
+    this.canvas.style.height = '100%';
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.renderer.setPixelRatio(dpr);
+    this.renderer.setSize(windowWidth, windowHeight, false);
+
+    if (this.onResize) {
+      this.onResize(this.logicalWidth, this.logicalHeight);
     }
-
-    this.canvas.style.width = `${Math.floor(displayW)}px`;
-    this.canvas.style.height = `${Math.floor(displayH)}px`;
-
-    // Render in crisp HD native resolution buffer for scenarios and props
-    this.renderer.setSize(Math.floor(displayW), Math.floor(displayH), false);
   };
 
   public setCameraPosition(pixelX: number, pixelY: number): void {

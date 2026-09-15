@@ -185,7 +185,7 @@ export class CharacterSelect {
         background: radial-gradient(circle at center, #180924 0%, #09030e 70%, #000000 100%);
         pointer-events: auto;
         color: #fff;
-        padding: 10px 16px 8px 16px;
+        padding: max(env(safe-area-inset-top, 8px), 8px) max(env(safe-area-inset-right, 16px), 16px) max(env(safe-area-inset-bottom, 8px), 8px) max(env(safe-area-inset-left, 16px), 16px);
         box-sizing: border-box;
         user-select: none;
         overflow: hidden;

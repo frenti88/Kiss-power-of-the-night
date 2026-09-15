@@ -150,6 +150,19 @@ export class ParallaxBackground {
     this.parallaxEnabled = enabled;
   }
 
+  public onResize(viewportWidth: number, viewportHeight: number): void {
+    this.viewportWidth = viewportWidth;
+    this.viewportHeight = viewportHeight;
+
+    for (const layer of this.layers) {
+      layer.mesh.scale.set(this.viewportWidth, this.viewportHeight, 1);
+      if (layer.texWidth > 0) {
+        layer.texture.repeat.set(this.viewportWidth / layer.texWidth, 1.0);
+        layer.texture.needsUpdate = true;
+      }
+    }
+  }
+
   public getLayersInfo(): { id: string; zIndex: number; factorX: number }[] {
     return this.layers.map((l) => ({
       id: l.config.id,

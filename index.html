@@ -21,47 +21,65 @@
         -webkit-touch-callout: none;
       }
       html, body {
-        background-color: #040306;
+        background-color: #000000;
         color: #f0f0f0;
         font-family: 'Press Start 2P', 'Courier New', monospace;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: 100vw;
         width: 100%;
         height: 100vh;
         height: 100dvh;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
         overflow: hidden;
         position: fixed;
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: auto;
       }
       #game-container {
-        position: relative;
+        position: fixed;
+        inset: 0;
         width: 100vw;
+        width: 100%;
         height: 100vh;
         height: 100dvh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #020205;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
         overflow: hidden;
+        display: block;
+        background: #000000;
       }
       canvas#game-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        height: 100%;
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: none;
         image-rendering: -moz-crisp-edges;
         image-rendering: -webkit-crisp-edges;
         image-rendering: pixelated;
         image-rendering: crisp-edges;
-        box-shadow: 0 0 30px rgba(255, 30, 80, 0.25), 0 0 80px rgba(0, 0, 0, 0.9);
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        aspect-ratio: 16 / 9;
+        touch-action: none;
       }
       #ui-overlay {
         position: absolute;
-        top: 0;
-        left: 0;
+        inset: 0;
         width: 100%;
         height: 100%;
         pointer-events: none;
+        overflow: hidden;
+        box-sizing: border-box;
       }
       #debug-info {
         position: absolute;
@@ -90,7 +108,7 @@
         align-items: center;
         gap: 8px;
       }
-      #fullscreen-btn, #music-btn {
+      #fullscreen-btn, #music-btn, #pause-btn {
         background: rgba(10, 8, 16, 0.85);
         border: 2px solid #555;
         font-family: 'Press Start 2P', monospace;
@@ -126,7 +144,14 @@
         color: #ff4466;
         border-color: #ff4466;
       }
-      #fullscreen-btn:active, #music-btn:active {
+      #pause-btn {
+        color: #ff9900;
+      }
+      #pause-btn:hover {
+        background: rgba(30, 25, 45, 0.95);
+        border-color: #ff9900;
+      }
+      #fullscreen-btn:active, #music-btn:active, #pause-btn:active {
         transform: translateY(2px);
         box-shadow: 0 1px 0 #000;
       }
@@ -185,6 +210,10 @@
           <span id="music-btn-icon">🔊</span>
           <span id="music-btn-label">BGM ON</span>
         </button>
+        <button id="pause-btn" title="Pause Game [ESC]" style="display: none;">
+          <span>⏸</span>
+          <span class="pause-label">PAUSE</span>
+        </button>
       </div>
 
       <canvas id="game-canvas"></canvas>
@@ -215,6 +244,24 @@
           }
         };
       }
+
+      // Prevent accidental browser pull-to-refresh, pinch-zoom, and rubber-banding
+      document.addEventListener('gesturestart', (e) => e.preventDefault(), { passive: false });
+      document.addEventListener('gesturechange', (e) => e.preventDefault(), { passive: false });
+      document.addEventListener('gestureend', (e) => e.preventDefault(), { passive: false });
+      document.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+      let lastTouchTime = 0;
+      document.addEventListener('touchend', (e) => {
+        const now = Date.now();
+        if (now - lastTouchTime <= 300) {
+          e.preventDefault();
+        }
+        lastTouchTime = now;
+      }, { passive: false });
     </script>
     <script type="module" src="/src/main.ts"></script>
   </body>

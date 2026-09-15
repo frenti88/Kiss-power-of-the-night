@@ -22,12 +22,16 @@ export class TitleScreen {
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
-        background: #000 url('/assets/intro_title.jpg?v=2') center center / contain no-repeat;
+        background: #000 url('/assets/intro_title.jpg?v=2') center center / cover no-repeat;
         pointer-events: auto;
         color: #fff;
         text-align: center;
-        padding-bottom: 24px;
+        padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
+        padding-left: max(env(safe-area-inset-left, 16px), 16px);
+        padding-right: max(env(safe-area-inset-right, 16px), 16px);
+        box-sizing: border-box;
         cursor: pointer;
+        overflow: hidden;
       ">
         <!-- CRT Vignette and Scanlines -->
         <div style="
@@ -41,8 +45,8 @@ export class TitleScreen {
         <!-- Music Status & Toggle Button (Top Right) -->
         <div id="music-toggle-btn" style="
           position: absolute;
-          top: 14px;
-          right: 16px;
+          top: max(env(safe-area-inset-top, 12px), 12px);
+          right: max(env(safe-area-inset-right, 16px), 16px);
           z-index: 20;
           background: rgba(0, 0, 0, 0.8);
           border: 2px solid #ffd700;

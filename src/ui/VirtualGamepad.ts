@@ -29,7 +29,7 @@ export class VirtualGamepad {
       display: ${this.isVisible ? 'flex' : 'none'};
       justify-content: space-between;
       align-items: flex-end;
-      padding: env(safe-area-inset-top, 12px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 14px) env(safe-area-inset-left, 16px);
+      padding: max(env(safe-area-inset-top, 8px), 8px) max(env(safe-area-inset-right, 18px), 18px) max(env(safe-area-inset-bottom, 12px), 12px) max(env(safe-area-inset-left, 18px), 18px);
       box-sizing: border-box;
       user-select: none;
       -webkit-user-select: none;
@@ -37,27 +37,12 @@ export class VirtualGamepad {
     `;
 
     this.gamepadEl.innerHTML = `
-      <!-- Top Control Bar (Pause & Gamepad Toggle) -->
+      <!-- Bottom Control Bar (Controls Toggle) -->
       <div style="
         position: absolute;
-        top: max(env(safe-area-inset-top, 8px), 8px);
+        bottom: max(env(safe-area-inset-bottom, 10px), 10px);
         left: 50%;
         transform: translateX(-50%);
-        display: flex;
-        gap: 12px;
-        pointer-events: auto;
-        z-index: 500;
-      ">
-        <button id="vpad-pause-btn" class="vpad-meta-btn" title="Pause Game">
-          ⏸ PAUSE
-        </button>
-      </div>
-
-      <!-- Toggle Visibility Icon (Top Right) -->
-      <div style="
-        position: absolute;
-        top: max(env(safe-area-inset-top, 8px), 8px);
-        right: max(env(safe-area-inset-right, 10px), 10px);
         pointer-events: auto;
         z-index: 500;
       ">

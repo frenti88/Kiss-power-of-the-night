@@ -25,6 +25,8 @@ export class CameraController {
   public shakeOffsetX: number = 0;
   public shakeOffsetY: number = 0;
 
+  private worldWidth: number = 3200;
+
   constructor(viewportWidth = 384, viewportHeight = 216) {
     this.viewportWidth = viewportWidth;
     this.viewportHeight = viewportHeight;
@@ -32,7 +34,19 @@ export class CameraController {
 
   public setBounds(minX: number, maxX: number): void {
     this.minX = minX;
+    this.worldWidth = maxX;
     this.maxX = Math.max(minX, maxX - this.viewportWidth);
+  }
+
+  public onResize(viewportWidth: number, viewportHeight: number, totalWorldWidth?: number): void {
+    this.viewportWidth = viewportWidth;
+    this.viewportHeight = viewportHeight;
+    if (totalWorldWidth !== undefined) {
+      this.worldWidth = totalWorldWidth;
+    }
+    this.maxX = Math.max(this.minX, this.worldWidth - this.viewportWidth);
+    if (this.x > this.maxX) this.x = this.maxX;
+    if (this.x < this.minX) this.x = this.minX;
   }
 
   public triggerShake(intensity: number, durationMs: number): void {
