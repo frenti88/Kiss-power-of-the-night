@@ -7,7 +7,7 @@ export class SaveManager {
   private static defaultData: SaveData = {
     saveVersion: SaveManager.CURRENT_VERSION,
     highScore: 0,
-    unlockedCharacters: ['demon', 'starchild'],
+    unlockedCharacters: ['starchild', 'demon'],
     completedWorlds: [],
     settings: {
       masterVolume: 0.8,

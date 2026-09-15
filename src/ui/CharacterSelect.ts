@@ -29,7 +29,7 @@ export interface CharacterCardData {
 export class CharacterSelect {
   private container: HTMLElement;
   private onSelect: (characterId: string) => void;
-  private selectedId: string = 'demon';
+  private selectedId: string = 'starchild';
   private keyListener: ((e: KeyboardEvent) => void) | null = null;
 
   constructor(container: HTMLElement, onSelect: (characterId: string) => void) {
@@ -42,24 +42,6 @@ export class CharacterSelect {
     const audio = AudioManager.getInstance();
 
     const characters: CharacterCardData[] = [
-      {
-        id: 'demon',
-        name: 'THE DEMON',
-        member: 'GENE SIMMONS',
-        subtitle: 'God of Thunder / Heavy Power',
-        role: 'HEAVY / POWER',
-        color: '#ff2a55',
-        verticalUrl: '/assets/characters/vertical_demon.png',
-        avatarUrl: '/assets/characters/avatar_demon.jpg',
-        symbol: '🦇',
-        desc: 'Crushing resilience and apocalyptic fireballs. Melee strikes with his barbed Axe-Bass pulverize roadies into dust.',
-        locked: !saveData.unlockedCharacters.includes('demon'),
-        stats: { health: 5, speed: 3, power: 5, defense: 4 },
-        weapon: 'Fireball (25 DMG)',
-        melee: 'Axe Bass / Demon Bite (45 DMG)',
-        special: 'Fire Breath (65 DMG)',
-        ultimate: 'God of Thunder (250 DMG Full-Screen)'
-      },
       {
         id: 'starchild',
         name: 'THE STARCHILD',
@@ -79,23 +61,22 @@ export class CharacterSelect {
         ultimate: 'Love Gun (230 DMG Burst)'
       },
       {
-        id: 'spaceman',
-        name: 'THE SPACEMAN',
-        member: 'ACE FREHLEY',
-        subtitle: 'Cosmic Shock / Shock Beam',
-        role: 'RANGE / MOBILITY',
-        color: '#00d2d3',
-        verticalUrl: '/assets/characters/vertical_spaceman.png',
-        avatarUrl: '/assets/characters/avatar_spaceman.jpg',
-        symbol: '⚡',
-        desc: 'Ace Frehley strikes from outer space! Fires high-velocity piercing cosmic laser beams and electrifying Gibson Les Paul solos.',
-        locked: !saveData.unlockedCharacters.includes('spaceman'),
-        lockReason: 'COMPLETE WORLD 1 TO UNLOCK',
-        stats: { health: 3, speed: 4, power: 5, defense: 3 },
-        weapon: 'Cosmic Beam (26 DMG - Piercing)',
-        melee: 'Smoke Guitar Shock (30 DMG)',
-        special: 'Meteor Strike (70 DMG)',
-        ultimate: 'Spacewalk Singularity (260 DMG)'
+        id: 'demon',
+        name: 'THE DEMON',
+        member: 'GENE SIMMONS',
+        subtitle: 'God of Thunder / Heavy Power',
+        role: 'HEAVY / POWER',
+        color: '#ff2a55',
+        verticalUrl: '/assets/characters/vertical_demon.png',
+        avatarUrl: '/assets/characters/avatar_demon.jpg',
+        symbol: '🦇',
+        desc: 'Crushing resilience and apocalyptic fireballs. Melee strikes with his barbed Axe-Bass pulverize roadies into dust.',
+        locked: !saveData.unlockedCharacters.includes('demon'),
+        stats: { health: 5, speed: 3, power: 5, defense: 4 },
+        weapon: 'Fireball (25 DMG)',
+        melee: 'Axe Bass / Demon Bite (45 DMG)',
+        special: 'Fire Breath (65 DMG)',
+        ultimate: 'God of Thunder (250 DMG Full-Screen)'
       },
       {
         id: 'catman',
@@ -115,6 +96,25 @@ export class CharacterSelect {
         melee: 'Cat Flurry (50 DMG)',
         special: 'Pounce (65 DMG)',
         ultimate: 'Drum Shockwave (240 DMG)'
+      },
+      {
+        id: 'spaceman',
+        name: 'THE SPACEMAN',
+        member: 'ACE FREHLEY',
+        subtitle: 'Cosmic Shock / Shock Beam',
+        role: 'RANGE / MOBILITY',
+        color: '#00d2d3',
+        verticalUrl: '/assets/characters/vertical_spaceman.png',
+        avatarUrl: '/assets/characters/avatar_spaceman.jpg',
+        symbol: '⚡',
+        desc: 'Ace Frehley strikes from outer space! Fires high-velocity piercing cosmic laser beams and electrifying Gibson Les Paul solos.',
+        locked: !saveData.unlockedCharacters.includes('spaceman'),
+        lockReason: 'COMPLETE WORLD 1 TO UNLOCK',
+        stats: { health: 3, speed: 4, power: 5, defense: 3 },
+        weapon: 'Cosmic Beam (26 DMG - Piercing)',
+        melee: 'Smoke Guitar Shock (30 DMG)',
+        special: 'Meteor Strike (70 DMG)',
+        ultimate: 'Spacewalk Singularity (260 DMG)'
       },
       {
         id: 'fox',

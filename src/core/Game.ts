@@ -36,7 +36,7 @@ export class Game {
   public uiManager: UIManager;
 
   public state: GameState = 'TITLE';
-  public selectedCharacterId: string = 'demon';
+  public selectedCharacterId: string = 'starchild';
 
   // Systems and entities
   private particleSystem!: ParticleSystem;
