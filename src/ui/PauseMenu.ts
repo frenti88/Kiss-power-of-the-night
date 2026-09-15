@@ -47,7 +47,7 @@ export class PauseMenu {
         text-shadow: 2px 2px 0 #b80000;
         font-family: 'Press Start 2P', Impact, sans-serif;
       ">
-        PAUSED
+        PAUSA
       </h2>
 
       <div style="display: flex; flex-direction: column; gap: 14px; width: 240px;">
@@ -63,7 +63,7 @@ export class PauseMenu {
           font-family: 'Press Start 2P', monospace;
           font-size: 10px;
           box-shadow: 0 4px 0 #000;
-        ">RESUME</button>
+        ">CONTINUAR</button>
 
         <button id="pause-music-btn" style="
           padding: 12px 10px;
@@ -77,7 +77,7 @@ export class PauseMenu {
           font-family: 'Press Start 2P', monospace;
           font-size: 10px;
           box-shadow: 0 4px 0 #000;
-        ">${isMusicOn ? '🔊 MUSIC: ON' : '🔇 MUSIC: OFF'}</button>
+        ">${isMusicOn ? '🔊 MÚSICA: SÍ' : '🔇 MÚSICA: NO'}</button>
 
         <button id="pause-restart-btn" style="
           padding: 12px 10px;
@@ -91,7 +91,7 @@ export class PauseMenu {
           font-family: 'Press Start 2P', monospace;
           font-size: 10px;
           box-shadow: 0 4px 0 #000;
-        ">RESTART LEVEL</button>
+        ">REINICIAR NIVEL</button>
 
         <button id="pause-quit-btn" style="
           padding: 12px 10px;
@@ -105,7 +105,7 @@ export class PauseMenu {
           font-family: 'Press Start 2P', monospace;
           font-size: 10px;
           box-shadow: 0 4px 0 #000;
-        ">TITLE SCREEN</button>
+        ">PANTALLA DE TÍTULO</button>
       </div>
     `;
 
@@ -128,7 +128,7 @@ export class PauseMenu {
     const musicBtn = document.getElementById('pause-music-btn');
     if (!musicBtn) return;
     const isMusicOn = AudioManager.getInstance().getIsMusicEnabled();
-    musicBtn.textContent = isMusicOn ? '🔊 MUSIC: ON' : '🔇 MUSIC: OFF';
+    musicBtn.textContent = isMusicOn ? '🔊 MÚSICA: SÍ' : '🔇 MÚSICA: NO';
     musicBtn.style.background = isMusicOn ? '#1a3a3a' : '#332222';
     musicBtn.style.color = isMusicOn ? '#00ffcc' : '#aaa';
     musicBtn.style.borderColor = isMusicOn ? '#00ffcc' : '#666';

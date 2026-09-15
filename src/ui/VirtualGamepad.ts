@@ -46,8 +46,8 @@ export class VirtualGamepad {
         pointer-events: auto;
         z-index: 500;
       ">
-        <button id="vpad-toggle-btn" class="vpad-meta-btn" title="Toggle On-Screen Controls">
-          🎮 CONTROLS
+        <button id="vpad-toggle-btn" class="vpad-meta-btn" title="Alternar Controles en Pantalla">
+          🎮 CONTROLES
         </button>
       </div>
 

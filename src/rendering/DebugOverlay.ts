@@ -63,23 +63,23 @@ export class DebugOverlay {
     if (ambient) {
       ambientHtml = `
         <hr style="border-color:#444;margin:4px 0;"/>
-        <b style="color:#ffcc00;">[AMBIENT ANIMATIONS - SECTION 20]</b><br/>
-        Parallax [F2]: <span style="color:${ambient.parallax ? '#00ff66' : '#ff4444'}">${ambient.parallax ? 'ACTIVE' : 'FROZEN'}</span> |
-        Particles [F3]: <span style="color:${ambient.particles ? '#00ff66' : '#ff4444'}">${ambient.particles ? 'ON' : 'OFF'}</span><br/>
-        Rain [F4]: <span style="color:${ambient.rain ? '#00ff66' : '#888'}">${ambient.rain ? 'ON' : 'OFF (default)'}</span> |
-        Neons [F5]: <span style="color:${ambient.neons ? '#00ff66' : '#ff4444'}">${ambient.neons ? 'ON' : 'OFF'}</span> |
-        Smoke [F6]: <span style="color:${ambient.smoke ? '#00ff66' : '#ff4444'}">${ambient.smoke ? 'ON' : 'OFF'}</span><br/>
-        <b style="color:#00e5ff;">PARTICLES:</b> Smoke: ${ambient.activeSmokeCount}/40 | FX: ${ambient.activeGeneralFxCount}/250 | Rain: ${ambient.activeRainCount}/60 (Total: ${ambient.totalActiveParticles})<br/>
-        <b style="color:#ff77ff;">LAYERS (Z):</b> [L0 Sky:-100] [L1 Clouds:-90] [L2 Skyline:-80] [L3 River/Bridge:-60] [L4 Facades:-30] [L5 Ground:0] [L5.5 Refl:1] [L6 FX:20] [L7 FG:40]<br/>
+        <b style="color:#ffcc00;">[ANIMACIONES AMBIENTALES - SECCIÓN 20]</b><br/>
+        Parallax [F2]: <span style="color:${ambient.parallax ? '#00ff66' : '#ff4444'}">${ambient.parallax ? 'ACTIVO' : 'CONGELADO'}</span> |
+        Partículas [F3]: <span style="color:${ambient.particles ? '#00ff66' : '#ff4444'}">${ambient.particles ? 'SÍ' : 'NO'}</span><br/>
+        Lluvia [F4]: <span style="color:${ambient.rain ? '#00ff66' : '#888'}">${ambient.rain ? 'SÍ' : 'NO (por defecto)'}</span> |
+        Neones [F5]: <span style="color:${ambient.neons ? '#00ff66' : '#ff4444'}">${ambient.neons ? 'SÍ' : 'NO'}</span> |
+        Humo [F6]: <span style="color:${ambient.smoke ? '#00ff66' : '#ff4444'}">${ambient.smoke ? 'SÍ' : 'NO'}</span><br/>
+        <b style="color:#00e5ff;">PARTÍCULAS:</b> Humo: ${ambient.activeSmokeCount}/40 | FX: ${ambient.activeGeneralFxCount}/250 | Lluvia: ${ambient.activeRainCount}/60 (Total: ${ambient.totalActiveParticles})<br/>
+        <b style="color:#ff77ff;">CAPAS (Z):</b> [C0 Cielo:-100] [C1 Nubes:-90] [C2 Skyline:-80] [C3 Río/Puente:-60] [C4 Fachadas:-30] [C5 Suelo:0] [C5.5 Refl:1] [C6 FX:20] [C7 Primer plano:40]<br/>
       `;
     }
 
     this.domElement.innerHTML = `
-      <b>[DEBUG MODE - F1 to toggle]</b><br/>
+      <b>[MODO DEPURACIÓN - F1 para alternar]</b><br/>
       FPS: ${fps}<br/>
-      PLAYER: X: ${Math.round(playerX)} | Y: ${Math.round(playerY)}<br/>
-      STATE: ${playerState}<br/>
-      ENEMIES: ${enemyCount} | PROJECTILES: ${projectileCount}<br/>
+      JUGADOR: X: ${Math.round(playerX)} | Y: ${Math.round(playerY)}<br/>
+      ESTADO: ${playerState}<br/>
+      ENEMIGOS: ${enemyCount} | PROYECTILES: ${projectileCount}<br/>
       ROCK POWER: ${Math.round(rockPower)}/100<br/>
       ${ambientHtml}
     `;

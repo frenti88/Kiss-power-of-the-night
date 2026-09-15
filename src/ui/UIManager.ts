@@ -115,9 +115,9 @@ export class UIManager {
       z-index: 600;
     `;
     banner.innerHTML = `
-      <div style="font-size: 14px; letter-spacing: 4px; color: #ff0055;">WORLD 1 CLEARED!</div>
-      <h1 style="font-size: 38px; color: #ffd700; margin: 10px 0; text-shadow: 0 0 20px #ff0055;">STAGE COMPLETE</h1>
-      <div style="font-size: 18px; color: #fff; margin-bottom: 25px;">TOTAL SCORE: ${score}</div>
+      <div style="font-size: 14px; letter-spacing: 4px; color: #ff0055;">¡MUNDO 1 SUPERADO!</div>
+      <h1 style="font-size: 38px; color: #ffd700; margin: 10px 0; text-shadow: 0 0 20px #ff0055;">NIVEL COMPLETADO</h1>
+      <div style="font-size: 18px; color: #fff; margin-bottom: 25px;">PUNTUACIÓN TOTAL: ${score}</div>
       <button id="victory-continue-btn" style="
         padding: 12px 30px;
         background: linear-gradient(180deg, #ff0055 0%, #b80000 100%);
@@ -127,7 +127,7 @@ export class UIManager {
         cursor: pointer;
         border-radius: 4px;
         letter-spacing: 2px;
-      ">STAGE SELECT</button>
+      ">SELECCIÓN DE FASE</button>
     `;
     this.overlayContainer.appendChild(banner);
     document.getElementById('victory-continue-btn')!.onclick = () => {
@@ -144,7 +144,7 @@ export class UIManager {
       const icon = document.getElementById('music-btn-icon');
       const label = document.getElementById('music-btn-label');
       if (icon) icon.textContent = enabled ? '🔊' : '🔇';
-      if (label) label.textContent = enabled ? 'BGM ON' : 'BGM OFF';
+      if (label) label.textContent = enabled ? 'MÚSICA: SÍ' : 'MÚSICA: NO';
       if (musicBtn) {
         if (enabled) {
           musicBtn.classList.remove('muted');
@@ -158,7 +158,7 @@ export class UIManager {
 
     audio.onMusicToggle = (enabled: boolean) => {
       updateBtn(enabled);
-      this.showNotification(enabled ? '🔊 MUSIC ON' : '🔇 MUSIC OFF');
+      this.showNotification(enabled ? '🔊 MÚSICA ACTIVADA' : '🔇 MÚSICA SILENCIADA');
       if (this.pauseMenu) {
         this.pauseMenu.updateMusicState();
       }

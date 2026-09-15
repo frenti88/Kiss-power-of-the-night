@@ -46,13 +46,13 @@ export class CharacterSelect {
         id: 'starchild',
         name: 'THE STARCHILD',
         member: 'PAUL STANLEY',
-        subtitle: 'Love Gun / Balanced Agility',
-        role: 'BALANCED / MOBILE',
+        subtitle: 'Love Gun / Agilidad Equilibrada',
+        role: 'EQUILIBRADO / ÁGIL',
         color: '#d056fd',
         verticalUrl: '/assets/characters/vertical_starchild.png',
         avatarUrl: '/assets/characters/avatar_starchild.jpg',
         symbol: '⭐',
-        desc: 'Superior mobility and rapid acrobatics. Fires dazzling star-shaped cosmic bolts with extreme fire rate.',
+        desc: 'Movilidad superior y acrobacias rápidas. Dispara deslumbrantes rayos cósmicos en forma de estrella con alta cadencia de fuego.',
         locked: !saveData.unlockedCharacters.includes('starchild'),
         stats: { health: 4, speed: 5, power: 4, defense: 3 },
         weapon: 'Star Shot (22 DMG - Rapid)',
@@ -64,13 +64,13 @@ export class CharacterSelect {
         id: 'demon',
         name: 'THE DEMON',
         member: 'GENE SIMMONS',
-        subtitle: 'God of Thunder / Heavy Power',
-        role: 'HEAVY / POWER',
+        subtitle: 'God of Thunder / Poder Pesado',
+        role: 'PESADO / PODER',
         color: '#ff2a55',
         verticalUrl: '/assets/characters/vertical_demon.png',
         avatarUrl: '/assets/characters/avatar_demon.jpg',
         symbol: '🦇',
-        desc: 'Crushing resilience and apocalyptic fireballs. Melee strikes with his barbed Axe-Bass pulverize roadies into dust.',
+        desc: 'Resistencia demoledora y bolas de fuego apocalípticas. Sus golpes cuerpo a cuerpo con el Axe-Bass pulverizan a los roadies.',
         locked: !saveData.unlockedCharacters.includes('demon'),
         stats: { health: 5, speed: 3, power: 5, defense: 4 },
         weapon: 'Fireball (25 DMG)',
@@ -82,15 +82,15 @@ export class CharacterSelect {
         id: 'catman',
         name: 'THE CATMAN',
         member: 'PETER CRISS',
-        subtitle: 'Wild Claws / Combo Striker',
+        subtitle: 'Wild Claws / Golpeador Combo',
         role: 'MELEE / COMBO',
         color: '#1dd1a1',
         verticalUrl: '/assets/characters/vertical_catman.png',
         avatarUrl: '/assets/characters/avatar_catman.jpg',
         symbol: '🐾',
-        desc: 'Peter Criss unleashed! Devastating multi-hit claw flurries, razor drumsticks, and thunderous acoustic drum shockwaves.',
+        desc: '¡Peter Criss desatado! Devastadoras ráfagas de garras multigolpe, baquetas afiladas y atronadoras ondas de choque acústicas.',
         locked: !saveData.unlockedCharacters.includes('catman'),
-        lockReason: 'COMPLETE WORLD 3 TO UNLOCK',
+        lockReason: 'COMPLETA EL MUNDO 3 PARA DESBLOQUEAR',
         stats: { health: 4, speed: 4, power: 4, defense: 4 },
         weapon: 'Claw Slash (28 DMG)',
         melee: 'Cat Flurry (50 DMG)',
@@ -101,15 +101,15 @@ export class CharacterSelect {
         id: 'spaceman',
         name: 'THE SPACEMAN',
         member: 'ACE FREHLEY',
-        subtitle: 'Cosmic Shock / Shock Beam',
-        role: 'RANGE / MOBILITY',
+        subtitle: 'Cosmic Shock / Rayo Eléctrico',
+        role: 'A DISTANCIA / AGILIDAD',
         color: '#00d2d3',
         verticalUrl: '/assets/characters/vertical_spaceman.png',
         avatarUrl: '/assets/characters/avatar_spaceman.jpg',
         symbol: '⚡',
-        desc: 'Ace Frehley strikes from outer space! Fires high-velocity piercing cosmic laser beams and electrifying Gibson Les Paul solos.',
+        desc: '¡Ace Frehley ataca desde el espacio exterior! Dispara rayos láser cósmicos perforantes de alta velocidad y electrizantes solos de Gibson Les Paul.',
         locked: !saveData.unlockedCharacters.includes('spaceman'),
-        lockReason: 'COMPLETE WORLD 1 TO UNLOCK',
+        lockReason: 'COMPLETA EL MUNDO 1 PARA DESBLOQUEAR',
         stats: { health: 3, speed: 4, power: 5, defense: 3 },
         weapon: 'Cosmic Beam (26 DMG - Piercing)',
         melee: 'Smoke Guitar Shock (30 DMG)',
@@ -120,15 +120,15 @@ export class CharacterSelect {
         id: 'fox',
         name: 'THE FOX',
         member: 'ERIC CARR',
-        subtitle: 'Thunder Beats / Blazing Dash',
-        role: 'EXTREME SPEED',
+        subtitle: 'Thunder Beats / Carrera Ardiente',
+        role: 'VELOCIDAD EXTREMA',
         color: '#ff9f43',
         verticalUrl: '/assets/characters/vertical_fox.png',
         avatarUrl: '/assets/characters/avatar_fox.jpg',
         symbol: '🦊',
-        desc: 'Eric Carr ignites the stage! Blazing fox-fire dashes, nitro double-bass percussion barrages, and blitz drumstick strikes.',
+        desc: '¡Eric Carr enciende el escenario! Impetuosas carreras con fuego de zorro, ráfagas de percusión con doble bombo y veloces golpes de baqueta.',
         locked: !saveData.unlockedCharacters.includes('fox'),
-        lockReason: 'COMPLETE WORLD 2 TO UNLOCK',
+        lockReason: 'COMPLETA EL MUNDO 2 PARA DESBLOQUEAR',
         stats: { health: 3, speed: 5, power: 4, defense: 3 },
         weapon: 'Fox Fire Blast (22 DMG)',
         melee: 'Thunder Drum Strike (35 DMG)',
@@ -139,15 +139,15 @@ export class CharacterSelect {
         id: 'ankh_warrior',
         name: 'THE ANKH WARRIOR',
         member: 'VINNIE VINCENT',
-        subtitle: 'Sun Sorcerer / Mystic Ray',
-        role: 'ENERGY / MAGIC',
+        subtitle: 'Hechicero Solar / Rayo Místico',
+        role: 'ENERGÍA / MAGIA',
         color: '#f5cd79',
         verticalUrl: '/assets/characters/vertical_ankh_warrior.png',
         avatarUrl: '/assets/characters/avatar_ankh_warrior.jpg',
         symbol: '☥',
-        desc: 'Vinnie Vincent wields the golden Ankh of eternity! Radiates solar plasma beams, golden scepter strikes and Egyptian wards.',
+        desc: '¡Vinnie Vincent empuña el Anj dorado de la eternidad! Emite rayos de plasma solar, golpes de cetro dorado y protección mística.',
         locked: !saveData.unlockedCharacters.includes('ankh_warrior'),
-        lockReason: 'COMPLETE WORLD 4 TO UNLOCK',
+        lockReason: 'COMPLETA EL MUNDO 4 PARA DESBLOQUEAR',
         stats: { health: 3, speed: 4, power: 5, defense: 4 },
         weapon: 'Solar Beam (26 DMG)',
         melee: 'Ankh Scepter Strike (38 DMG)',
@@ -211,7 +211,7 @@ export class CharacterSelect {
             margin: 0 0 4px 0;
             animation: headerFlicker 2.5s infinite alternate;
           ">
-            SELECT YOUR WARRIOR
+            SELECCIONA TU GUERRERO
           </h1>
           <div class="sub-header-text" style="
             font-size: 9px;
@@ -221,7 +221,7 @@ export class CharacterSelect {
             text-shadow: 1px 1px 0 #000;
             animation: subHeaderFlash 1.2s steps(2, start) infinite;
           ">
-            [ PLAYER 1 - CHOOSE YOUR ROCK HERO ]
+            [ JUGADOR 1 - ELIGE A TU HÉROE DEL ROCK ]
           </div>
         </div>
 
@@ -360,7 +360,7 @@ export class CharacterSelect {
                         border: 1px solid #ff4757;
                         text-shadow: 1px 1px 0 #000;
                         letter-spacing: 1px;
-                      ">LOCKED</div>
+                      ">BLOQUEADO</div>
                     </div>
                   `
                       : ''
@@ -434,8 +434,8 @@ export class CharacterSelect {
             ">
               ${
                 currentHero.locked
-                  ? `🔒 ${currentHero.lockReason} • Complete previous stages in Rock Mode to unlock this warrior!`
-                  : `WEAPON: ${currentHero.weapon} | SPECIAL: ${currentHero.special} | ULTIMATE: ${currentHero.ultimate}`
+                  ? `🔒 ${currentHero.lockReason} • ¡Completa los niveles previos en Modo Rock para desbloquear a este guerrero!`
+                  : `ARMA: ${currentHero.weapon} | ESPECIAL: ${currentHero.special} | DEFINITIVA: ${currentHero.ultimate}`
               }
             </div>
           </div>
@@ -444,17 +444,17 @@ export class CharacterSelect {
           <div style="display: flex; gap: 14px; font-family: 'Press Start 2P', monospace; font-size: 7px; align-items: center;">
             <div style="display: flex; flex-direction: column; gap: 3px;">
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                <span style="color: #ff4757;">HP:</span>
+                <span style="color: #ff4757;">SAL:</span>
                 ${renderPips(currentHero.stats.health, 5, '#ff4757')}
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                <span style="color: #2ed573;">SPD:</span>
+                <span style="color: #2ed573;">VEL:</span>
                 ${renderPips(currentHero.stats.speed, 5, '#2ed573')}
               </div>
             </div>
             <div style="display: flex; flex-direction: column; gap: 3px;">
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-                <span style="color: #ffa502;">POW:</span>
+                <span style="color: #ffa502;">POD:</span>
                 ${renderPips(currentHero.stats.power, 5, '#ffa502')}
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
@@ -504,7 +504,7 @@ export class CharacterSelect {
               gap: 8px;
             ">
               <span>🔒</span>
-              <span>LOCKED: ${currentHero.lockReason}</span>
+              <span>BLOQUEADO: ${currentHero.lockReason}</span>
             </button>
           `
               : `
@@ -542,7 +542,7 @@ export class CharacterSelect {
               gap: 10px;
             ">
               <span class="pixel-arrow left-arrow">►</span>
-              <span>ROCK TO DETROIT!</span>
+              <span>¡A ROCKEAR EN DETROIT!</span>
               <span class="pixel-arrow right-arrow">◄</span>
             </button>
           `
@@ -555,7 +555,7 @@ export class CharacterSelect {
             color: #888;
             text-shadow: 1px 1px 0 #000;
           ">
-            [◄ / ► or A / D] SELECT • [ENTER / SPACE / TAP] ROCK OUT
+            [◄ / ► o A / D] SELECCIONAR • [ENTER / ESPACIO / TOQUE] A ROCKEAR
           </div>
         </div>
       </div>

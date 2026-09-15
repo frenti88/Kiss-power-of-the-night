@@ -65,7 +65,7 @@ export class TitleScreen {
           user-select: none;
         ">
           <span id="music-icon">${audio.getIsMusicEnabled() ? '🔊' : '🔇'}</span>
-          <span id="music-label">${audio.getIsMusicEnabled() ? 'BGM: ON' : 'BGM: OFF'}</span>
+          <span id="music-label">${audio.getIsMusicEnabled() ? 'MÚSICA: SÍ' : 'MÚSICA: NO'}</span>
         </div>
 
         <!-- 16-Bit Arcade Start Button Container placed dynamically at the bottom -->
@@ -114,7 +114,7 @@ export class TitleScreen {
             gap: 14px;
           ">
             <span class="pixel-arrow left-arrow">►</span>
-            <span class="pixel-btn-label">Start</span>
+            <span class="pixel-btn-label">INICIAR</span>
             <span class="pixel-arrow right-arrow">◄</span>
           </button>
 
@@ -130,7 +130,7 @@ export class TitleScreen {
             border: 2px solid #555;
             box-shadow: inset 2px 2px 0 #888, inset -2px -2px 0 #222, 0 4px 0 #000;
           ">
-            PUSH START BUTTON
+            PULSA EL BOTÓN INICIAR
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@ export class TitleScreen {
       const icon = document.getElementById('music-icon');
       const label = document.getElementById('music-label');
       if (icon) icon.textContent = isEnabled ? '🔊' : '🔇';
-      if (label) label.textContent = isEnabled ? 'BGM: ON' : 'BGM: OFF';
+      if (label) label.textContent = isEnabled ? 'MÚSICA: SÍ' : 'MÚSICA: NO';
       if (musicBtn) {
         musicBtn.style.borderColor = isEnabled ? '#ffd700' : '#666';
         musicBtn.style.color = isEnabled ? '#ffd700' : '#888';

@@ -47,7 +47,7 @@ export class HUD {
           <div style="display: flex; flex-direction: column; gap: 4px;">
             <div style="display: flex; justify-content: space-between; font-size: 11px;">
               <span id="hud-name" style="color: #ffd700;">THE DEMON</span>
-              <span id="hud-lives" style="color: #ff3366;">LIVES: 3</span>
+              <span id="hud-lives" style="color: #ff3366;">VIDAS: 3</span>
             </div>
 
             <!-- Health Bar -->
@@ -68,8 +68,8 @@ export class HUD {
 
         <!-- Score & World Info -->
         <div style="background: rgba(0,0,0,0.7); padding: 6px 14px; border: 2px solid #555; border-radius: 4px; text-align: right;">
-          <div style="font-size: 10px; color: #aaa;">WORLD 1: DETROIT ROCK CITY</div>
-          <div id="hud-score" style="font-size: 16px; color: #ffd700; letter-spacing: 2px;">SCORE: 000000</div>
+          <div style="font-size: 10px; color: #aaa;">MUNDO 1: DETROIT ROCK CITY</div>
+          <div id="hud-score" style="font-size: 16px; color: #ffd700; letter-spacing: 2px;">PUNTOS: 000000</div>
         </div>
       </div>
 
@@ -107,7 +107,7 @@ export class HUD {
 
     // Lives
     const livesEl = document.getElementById('hud-lives');
-    if (livesEl) livesEl.textContent = `LIVES: ${player.lives}`;
+    if (livesEl) livesEl.textContent = `VIDAS: ${player.lives}`;
 
     // Health Bar
     const healthPercent = Math.max(0, Math.min(100, (player.health.current / player.health.max) * 100));
@@ -135,7 +135,7 @@ export class HUD {
     }
     if (rockStatus) {
       if (rockPercent >= 100) {
-        rockStatus.innerHTML = '<span style="color:#ffd700; font-weight:bold; animation: blink 0.5s infinite;">READY!</span>';
+        rockStatus.innerHTML = '<span style="color:#ffd700; font-weight:bold; animation: blink 0.5s infinite;">¡LISTO!</span>';
       } else {
         rockStatus.textContent = `${Math.floor(rockPercent)}%`;
       }
@@ -144,7 +144,7 @@ export class HUD {
     // Score
     const scoreEl = document.getElementById('hud-score');
     if (scoreEl) {
-      scoreEl.textContent = `SCORE: ${player.score.toString().padStart(6, '0')}`;
+      scoreEl.textContent = `PUNTOS: ${player.score.toString().padStart(6, '0')}`;
     }
   }
 
