@@ -22,60 +22,89 @@ export class TitleScreen {
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
-        background: #000 url('/assets/intro_title.jpg?v=2') center center / cover no-repeat;
+        background-color: #050208;
         pointer-events: auto;
         color: #fff;
         text-align: center;
-        padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
+        padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px);
         padding-left: max(env(safe-area-inset-left, 16px), 16px);
         padding-right: max(env(safe-area-inset-right, 16px), 16px);
         box-sizing: border-box;
         cursor: pointer;
         overflow: hidden;
+        user-select: none;
       ">
+        <!-- Ambient Widescreen Atmosphere (fills sides on wide desktop screens with blurred art colors) -->
+        <div class="intro-ambient-bg" style="
+          position: absolute;
+          inset: -40px;
+          background: url('/assets/intro_title.jpg?v=2') center center / cover no-repeat;
+          filter: blur(28px) brightness(0.35) saturate(1.4);
+          transform: scale(1.08);
+          pointer-events: none;
+          z-index: 1;
+        "></div>
+
+        <!-- Vignette Shadow to smoothly blend edges -->
+        <div style="
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at center, rgba(0,0,0,0) 45%, rgba(0,0,0,0.75) 100%);
+          pointer-events: none;
+          z-index: 2;
+        "></div>
+
+        <!-- 100% Complete Crisp Artwork Canvas (Never cut, preserves logo and artwork fully on desktop & all screens) -->
+        <div class="intro-artwork-container" style="
+          position: absolute;
+          inset: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          pointer-events: none;
+          z-index: 3;
+          padding: max(env(safe-area-inset-top, 8px), 8px) max(env(safe-area-inset-right, 10px), 10px) max(env(safe-area-inset-bottom, 10px), 10px) max(env(safe-area-inset-left, 10px), 10px);
+          box-sizing: border-box;
+        ">
+          <img 
+            id="intro-main-artwork"
+            src="/assets/intro_title.jpg?v=2" 
+            alt="KISS: Power of the Night" 
+            style="
+              max-width: 100%;
+              max-height: 100%;
+              width: 100%;
+              height: 100%;
+              aspect-ratio: 1024 / 767;
+              object-fit: contain;
+              object-position: center center;
+              image-rendering: pixelated;
+              display: block;
+              filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.95));
+            "
+          />
+        </div>
+
         <!-- CRT Vignette and Scanlines -->
         <div style="
           position: absolute;
           inset: 0;
-          background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+          background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.025), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.025));
           background-size: 100% 3px, 6px 100%;
           pointer-events: none;
+          z-index: 4;
         "></div>
 
-        <!-- Music Status & Toggle Button (Top Right) -->
-        <div id="music-toggle-btn" style="
-          position: absolute;
-          top: max(env(safe-area-inset-top, 12px), 12px);
-          right: max(env(safe-area-inset-right, 16px), 16px);
-          z-index: 20;
-          background: rgba(0, 0, 0, 0.8);
-          border: 2px solid #ffd700;
-          color: #ffd700;
-          padding: 6px 12px;
-          font-size: 11px;
-          font-family: 'Courier New', monospace;
-          font-weight: bold;
-          letter-spacing: 1px;
-          border-radius: 4px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
-          user-select: none;
-        ">
-          <span id="music-icon">${audio.getIsMusicEnabled() ? '🔊' : '🔇'}</span>
-          <span id="music-label">${audio.getIsMusicEnabled() ? 'MÚSICA: SÍ' : 'MÚSICA: NO'}</span>
-        </div>
-
         <!-- 16-Bit Arcade Start Button Container placed dynamically at the bottom -->
-        <div style="
+        <div class="intro-action-footer" style="
           position: relative;
           z-index: 10;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 12px;
+          margin-bottom: max(env(safe-area-inset-bottom, 16px), 16px);
+          pointer-events: auto;
         ">
           <!-- 16-Bit Beveled Arcade START Button -->
           <button id="start-btn" style="
@@ -119,7 +148,7 @@ export class TitleScreen {
           </button>
 
           <!-- 16-Bit Arcade Cabinet Subtitle -->
-          <div style="
+          <div class="intro-start-subtitle" style="
             font-family: 'Press Start 2P', 'Courier New', monospace;
             font-size: 10px;
             letter-spacing: 2px;
@@ -192,48 +221,33 @@ export class TitleScreen {
             0 4px 0 rgba(0, 0, 0, 0.75) !important;
         }
 
-        #music-toggle-btn:hover {
-          background: rgba(30, 30, 40, 0.95);
-          border-color: #ff0055;
-          color: #ff0055;
+        @media (max-height: 600px) {
+          #start-btn {
+            padding: 10px 28px !important;
+            font-size: 13px !important;
+          }
+          .intro-action-footer {
+            gap: 6px !important;
+            margin-bottom: 6px !important;
+          }
+          .intro-start-subtitle {
+            font-size: 8px !important;
+            padding: 4px 10px !important;
+          }
         }
       </style>
     `;
-
-    const musicBtn = document.getElementById('music-toggle-btn');
-    const updateMusicUI = () => {
-      const isEnabled = audio.getIsMusicEnabled();
-      const icon = document.getElementById('music-icon');
-      const label = document.getElementById('music-label');
-      if (icon) icon.textContent = isEnabled ? '🔊' : '🔇';
-      if (label) label.textContent = isEnabled ? 'MÚSICA: SÍ' : 'MÚSICA: NO';
-      if (musicBtn) {
-        musicBtn.style.borderColor = isEnabled ? '#ffd700' : '#666';
-        musicBtn.style.color = isEnabled ? '#ffd700' : '#888';
-        musicBtn.style.boxShadow = isEnabled ? '0 0 12px rgba(255, 215, 0, 0.4)' : 'none';
-      }
-    };
-
-    if (musicBtn) {
-      musicBtn.onclick = (e) => {
-        e.stopPropagation();
-        audio.toggleMusic();
-        updateMusicUI();
-      };
-    }
 
     // Immediate autoplay attempt if not muted
     if (audio.getIsMusicEnabled()) {
       audio.startIntroBGM();
     }
-    setTimeout(updateMusicUI, 100);
 
     // Universal unlock listeners (in case the browser requires a gesture to resume AudioContext)
     const unlockEvents = ['pointerdown', 'mousedown', 'mousemove', 'keydown', 'touchstart', 'wheel', 'focus'];
     const unlockHandler = () => {
       if (audio.getIsMusicEnabled() && !audio.isPlayingBGM()) {
         audio.startIntroBGM();
-        updateMusicUI();
       }
     };
     unlockEvents.forEach((evt) => window.addEventListener(evt, unlockHandler, { passive: true }));
@@ -273,11 +287,9 @@ export class TitleScreen {
       } else if (e.code === 'KeyM') {
         e.preventDefault();
         audio.toggleMusic();
-        updateMusicUI();
       } else {
         if (audio.getIsMusicEnabled() && !audio.isPlayingBGM()) {
           audio.startIntroBGM();
-          updateMusicUI();
         }
       }
     };

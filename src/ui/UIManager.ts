@@ -51,6 +51,7 @@ export class UIManager {
   }
 
   public showTitle(): void {
+    document.body.classList.remove('in-gameplay');
     const pauseBtn = document.getElementById('pause-btn');
     if (pauseBtn) pauseBtn.style.display = 'none';
     this.virtualGamepad.hide();
@@ -61,6 +62,7 @@ export class UIManager {
   }
 
   public showCharacterSelect(): void {
+    document.body.classList.remove('in-gameplay');
     const pauseBtn = document.getElementById('pause-btn');
     if (pauseBtn) pauseBtn.style.display = 'none';
     this.virtualGamepad.hide();
@@ -70,6 +72,7 @@ export class UIManager {
   }
 
   public showGameplayHUD(): void {
+    document.body.classList.add('in-gameplay');
     const pauseBtn = document.getElementById('pause-btn');
     if (pauseBtn) pauseBtn.style.display = 'flex';
     this.titleScreen.hide();

@@ -101,12 +101,17 @@
       #top-bar-controls {
         position: absolute;
         top: max(env(safe-area-inset-top, 10px), 10px);
-        left: 50%;
-        transform: translateX(-50%);
+        right: max(env(safe-area-inset-right, 14px), 14px);
         z-index: 600;
         display: flex;
         align-items: center;
         gap: 8px;
+        transition: right 0.2s ease, left 0.2s ease, transform 0.2s ease;
+      }
+      body.in-gameplay #top-bar-controls {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
       }
       #fullscreen-btn, #music-btn, #pause-btn {
         background: rgba(10, 8, 16, 0.85);
