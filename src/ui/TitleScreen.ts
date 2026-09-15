@@ -60,8 +60,8 @@ export class TitleScreen {
           box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
           user-select: none;
         ">
-          <span id="music-icon">${audio.isPlayingBGM() ? '🔊' : '🎵'}</span>
-          <span id="music-label">${audio.isPlayingBGM() ? 'DETROIT ROCK CITY: ON' : 'PLAY DETROIT ROCK CITY'}</span>
+          <span id="music-icon">${audio.getIsMusicEnabled() ? '🔊' : '🔇'}</span>
+          <span id="music-label">${audio.getIsMusicEnabled() ? 'BGM: ON' : 'BGM: OFF'}</span>
         </div>
 
         <!-- 16-Bit Arcade Start Button Container placed dynamically at the bottom -->
@@ -198,33 +198,36 @@ export class TitleScreen {
 
     const musicBtn = document.getElementById('music-toggle-btn');
     const updateMusicUI = () => {
-      const isPlaying = audio.isPlayingBGM();
+      const isEnabled = audio.getIsMusicEnabled();
       const icon = document.getElementById('music-icon');
       const label = document.getElementById('music-label');
-      if (icon) icon.textContent = isPlaying ? '🔊' : '🎵';
-      if (label) label.textContent = isPlaying ? 'DETROIT ROCK CITY: ON' : 'PLAY DETROIT ROCK CITY';
+      if (icon) icon.textContent = isEnabled ? '🔊' : '🔇';
+      if (label) label.textContent = isEnabled ? 'BGM: ON' : 'BGM: OFF';
+      if (musicBtn) {
+        musicBtn.style.borderColor = isEnabled ? '#ffd700' : '#666';
+        musicBtn.style.color = isEnabled ? '#ffd700' : '#888';
+        musicBtn.style.boxShadow = isEnabled ? '0 0 12px rgba(255, 215, 0, 0.4)' : 'none';
+      }
     };
 
     if (musicBtn) {
       musicBtn.onclick = (e) => {
         e.stopPropagation();
-        if (audio.isPlayingBGM()) {
-          audio.stopBGM();
-        } else {
-          audio.startIntroBGM();
-        }
+        audio.toggleMusic();
         updateMusicUI();
       };
     }
 
-    // Immediate autoplay attempt
-    audio.startIntroBGM();
+    // Immediate autoplay attempt if not muted
+    if (audio.getIsMusicEnabled()) {
+      audio.startIntroBGM();
+    }
     setTimeout(updateMusicUI, 100);
 
     // Universal unlock listeners (in case the browser requires a gesture to resume AudioContext)
     const unlockEvents = ['pointerdown', 'mousedown', 'mousemove', 'keydown', 'touchstart', 'wheel', 'focus'];
     const unlockHandler = () => {
-      if (!audio.isPlayingBGM()) {
+      if (audio.getIsMusicEnabled() && !audio.isPlayingBGM()) {
         audio.startIntroBGM();
         updateMusicUI();
       }
@@ -236,7 +239,9 @@ export class TitleScreen {
       startBtn.onclick = (e) => {
         e.stopPropagation();
         audio.playPickup();
-        audio.startIntroBGM();
+        if (audio.getIsMusicEnabled()) {
+          audio.startIntroBGM();
+        }
         setTimeout(() => this.triggerStart(), 120);
       };
     }
@@ -245,7 +250,9 @@ export class TitleScreen {
     if (wrap) {
       wrap.onclick = () => {
         audio.playPickup();
-        audio.startIntroBGM();
+        if (audio.getIsMusicEnabled()) {
+          audio.startIntroBGM();
+        }
         setTimeout(() => this.triggerStart(), 120);
       };
     }
@@ -255,10 +262,16 @@ export class TitleScreen {
       if (['Space', 'Enter', 'KeyX', 'KeyJ'].includes(e.code)) {
         e.preventDefault();
         audio.playPickup();
-        audio.startIntroBGM();
+        if (audio.getIsMusicEnabled()) {
+          audio.startIntroBGM();
+        }
         setTimeout(() => this.triggerStart(), 120);
+      } else if (e.code === 'KeyM') {
+        e.preventDefault();
+        audio.toggleMusic();
+        updateMusicUI();
       } else {
-        if (!audio.isPlayingBGM()) {
+        if (audio.getIsMusicEnabled() && !audio.isPlayingBGM()) {
           audio.startIntroBGM();
           updateMusicUI();
         }

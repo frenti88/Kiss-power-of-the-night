@@ -83,6 +83,9 @@ export class Game {
     this.inputManager.onToggleSmoke = () => {
       this.particleSystem.smokeEnabled = !this.particleSystem.smokeEnabled;
     };
+    this.inputManager.onToggleMusic = () => {
+      this.audioManager.toggleMusic();
+    };
 
     this.uiManager = new UIManager(
       this.uiOverlay,

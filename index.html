@@ -79,15 +79,20 @@
         border: 2px solid #00aa44;
       }
 
-      /* Global Fullscreen Button (Top Left) */
-      #fullscreen-btn {
+      /* Global Top Bar Controls (Fullscreen + Music Toggle) */
+      #top-bar-controls {
         position: absolute;
         top: max(env(safe-area-inset-top, 10px), 10px);
-        left: max(env(safe-area-inset-left, 12px), 12px);
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #fullscreen-btn, #music-btn {
         background: rgba(10, 8, 16, 0.85);
         border: 2px solid #555;
-        color: #ffd700;
         font-family: 'Press Start 2P', monospace;
         font-size: 9px;
         padding: 6px 10px;
@@ -96,8 +101,32 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        transition: border-color 0.15s, color 0.15s, background 0.15s;
+        border-radius: 2px;
       }
-      #fullscreen-btn:active {
+      #fullscreen-btn {
+        color: #ffd700;
+      }
+      #fullscreen-btn:hover {
+        background: rgba(30, 25, 45, 0.95);
+        border-color: #ffd700;
+      }
+      #music-btn {
+        color: #00ffcc;
+      }
+      #music-btn:hover {
+        background: rgba(30, 25, 45, 0.95);
+        border-color: #00ffcc;
+      }
+      #music-btn.muted {
+        color: #888888;
+        border-color: #444;
+      }
+      #music-btn.muted:hover {
+        color: #ff4466;
+        border-color: #ff4466;
+      }
+      #fullscreen-btn:active, #music-btn:active {
         transform: translateY(2px);
         box-shadow: 0 1px 0 #000;
       }
@@ -147,10 +176,16 @@
 
     <!-- Main Game Container -->
     <div id="game-container">
-      <button id="fullscreen-btn" title="Toggle Fullscreen">
-        <span>⛶</span>
-        <span class="fs-label">FULL</span>
-      </button>
+      <div id="top-bar-controls">
+        <button id="fullscreen-btn" title="Toggle Fullscreen">
+          <span>⛶</span>
+          <span class="fs-label">FULL</span>
+        </button>
+        <button id="music-btn" title="Toggle Music [M]">
+          <span id="music-btn-icon">🔊</span>
+          <span id="music-btn-label">BGM ON</span>
+        </button>
+      </div>
 
       <canvas id="game-canvas"></canvas>
       <div id="ui-overlay"></div>

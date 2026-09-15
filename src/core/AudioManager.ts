@@ -1,4 +1,5 @@
 import { MidiPlayer } from './MidiPlayer';
+import { SaveManager } from './SaveManager';
 
 export class AudioManager {
   private static instance: AudioManager;
@@ -11,6 +12,8 @@ export class AudioManager {
   public masterVolume: number = 0.8;
   public musicVolume: number = 0.6;
   public sfxVolume: number = 0.9;
+  public isMusicMuted: boolean = SaveManager.isMusicMuted();
+  public onMusicToggle?: (enabled: boolean) => void;
 
   private isBgmPlaying: boolean = false;
   private bgmIntervalId: number | null = null;
@@ -35,9 +38,12 @@ export class AudioManager {
     this.sfxGain = this.ctx.createGain();
     this.musicGain = this.ctx.createGain();
 
+    this.isMusicMuted = SaveManager.isMusicMuted();
+    const initialMusicGain = this.isMusicMuted ? 0 : this.musicVolume;
+
     this.masterGain.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
     this.sfxGain.gain.setValueAtTime(this.sfxVolume, this.ctx.currentTime);
-    this.musicGain.gain.setValueAtTime(this.musicVolume, this.ctx.currentTime);
+    this.musicGain.gain.setValueAtTime(initialMusicGain, this.ctx.currentTime);
 
     this.sfxGain.connect(this.masterGain);
     this.musicGain.connect(this.masterGain);
@@ -326,6 +332,7 @@ export class AudioManager {
   ];
 
   public startBGM(): void {
+    if (this.isMusicMuted) return;
     if (!this.ensureContext()) return;
     if (this.isPlayingBGM()) return;
 
@@ -465,6 +472,7 @@ export class AudioManager {
   }
 
   public startIntroBGM(): void {
+    if (this.isMusicMuted) return;
     this.ensureContext();
     if (!this.isPlayingBGM()) {
       this.startBGM();
@@ -473,6 +481,41 @@ export class AudioManager {
 
   public isPlayingBGM(): boolean {
     return this.isBgmPlaying || (this.midiPlayer ? this.midiPlayer.getIsPlaying() : false);
+  }
+
+  public toggleMusic(): boolean {
+    this.isMusicMuted = !this.isMusicMuted;
+    SaveManager.setMusicMuted(this.isMusicMuted);
+
+    if (!this.ctx) {
+      this.ensureContext();
+    }
+
+    if (this.ctx && this.musicGain) {
+      const targetGain = this.isMusicMuted ? 0 : this.musicVolume;
+      this.musicGain.gain.setValueAtTime(targetGain, this.ctx.currentTime);
+    }
+
+    if (this.isMusicMuted) {
+      this.stopBGM();
+    } else {
+      this.startBGM();
+    }
+
+    if (this.onMusicToggle) {
+      this.onMusicToggle(!this.isMusicMuted);
+    }
+
+    return !this.isMusicMuted;
+  }
+
+  public setMusicEnabled(enabled: boolean): void {
+    if (this.isMusicMuted === !enabled) return;
+    this.toggleMusic();
+  }
+
+  public getIsMusicEnabled(): boolean {
+    return !this.isMusicMuted;
   }
 
   public toggleMute(): boolean {

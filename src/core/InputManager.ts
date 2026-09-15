@@ -39,6 +39,7 @@ export class InputManager {
   public onToggleRain?: () => void;
   public onToggleNeons?: () => void;
   public onToggleSmoke?: () => void;
+  public onToggleMusic?: () => void;
 
   constructor() {
     window.addEventListener('keydown', this.handleKeyDown);
@@ -76,6 +77,11 @@ export class InputManager {
     if (e.key === 'F6') {
       e.preventDefault();
       if (this.onToggleSmoke) this.onToggleSmoke();
+      return;
+    }
+    if (e.code === 'KeyM') {
+      e.preventDefault();
+      if (this.onToggleMusic) this.onToggleMusic();
       return;
     }
 

@@ -60,4 +60,15 @@ export class SaveManager {
     }
     return data.highScore;
   }
+
+  public static isMusicMuted(): boolean {
+    const data = SaveManager.load();
+    return !!data.settings.musicMuted;
+  }
+
+  public static setMusicMuted(muted: boolean): boolean {
+    const data = SaveManager.load();
+    data.settings.musicMuted = muted;
+    return SaveManager.save(data);
+  }
 }

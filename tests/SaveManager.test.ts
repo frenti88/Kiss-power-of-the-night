@@ -44,4 +44,14 @@ describe('SaveManager', () => {
     const data = SaveManager.load();
     expect(data.unlockedCharacters).toContain('spaceman');
   });
+
+  it('should get and set music muted state', () => {
+    expect(SaveManager.isMusicMuted()).toBe(false);
+
+    SaveManager.setMusicMuted(true);
+    expect(SaveManager.isMusicMuted()).toBe(true);
+
+    SaveManager.setMusicMuted(false);
+    expect(SaveManager.isMusicMuted()).toBe(false);
+  });
 });

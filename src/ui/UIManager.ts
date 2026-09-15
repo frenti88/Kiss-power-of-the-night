@@ -5,6 +5,7 @@ import { PauseMenu } from './PauseMenu';
 import { VirtualGamepad } from './VirtualGamepad';
 import { Player } from '../entities/player/Player';
 import { InputManager } from '../core/InputManager';
+import { AudioManager } from '../core/AudioManager';
 
 export class UIManager {
   private overlayContainer: HTMLElement;
@@ -13,6 +14,7 @@ export class UIManager {
   public hud: HUD;
   public pauseMenu: PauseMenu;
   public virtualGamepad: VirtualGamepad;
+  private toastTimeout: number | null = null;
 
   constructor(
     overlayContainer: HTMLElement,
@@ -36,6 +38,8 @@ export class UIManager {
     );
     this.virtualGamepad = new VirtualGamepad(this.overlayContainer, inputManager);
     this.virtualGamepad.init();
+
+    this.initMusicControls();
   }
 
   public showTitle(): void {
@@ -111,5 +115,84 @@ export class UIManager {
       banner.remove();
       onContinue();
     };
+  }
+
+  private initMusicControls(): void {
+    const musicBtn = document.getElementById('music-btn');
+    const audio = AudioManager.getInstance();
+
+    const updateBtn = (enabled: boolean) => {
+      const icon = document.getElementById('music-btn-icon');
+      const label = document.getElementById('music-btn-label');
+      if (icon) icon.textContent = enabled ? '🔊' : '🔇';
+      if (label) label.textContent = enabled ? 'BGM ON' : 'BGM OFF';
+      if (musicBtn) {
+        if (enabled) {
+          musicBtn.classList.remove('muted');
+        } else {
+          musicBtn.classList.add('muted');
+        }
+      }
+    };
+
+    updateBtn(audio.getIsMusicEnabled());
+
+    audio.onMusicToggle = (enabled: boolean) => {
+      updateBtn(enabled);
+      this.showNotification(enabled ? '🔊 MUSIC ON' : '🔇 MUSIC OFF');
+      if (this.pauseMenu) {
+        this.pauseMenu.updateMusicState();
+      }
+    };
+
+    if (musicBtn) {
+      musicBtn.onclick = (e) => {
+        e.stopPropagation();
+        audio.toggleMusic();
+      };
+    }
+  }
+
+  public showNotification(message: string, durationMs: number = 1500): void {
+    let toast = document.getElementById('arcade-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'arcade-toast';
+      toast.style.cssText = `
+        position: absolute;
+        top: 54px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(10, 8, 20, 0.95);
+        border: 2px solid #ffd700;
+        color: #ffd700;
+        font-family: 'Press Start 2P', monospace;
+        font-size: 10px;
+        padding: 8px 16px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.85);
+        pointer-events: none;
+        z-index: 1000;
+        transition: opacity 0.25s;
+        border-radius: 2px;
+        text-align: center;
+        letter-spacing: 1px;
+      `;
+      this.overlayContainer.parentElement?.appendChild(toast) || this.overlayContainer.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.display = 'block';
+
+    if (this.toastTimeout !== null) {
+      clearTimeout(this.toastTimeout);
+    }
+    this.toastTimeout = window.setTimeout(() => {
+      if (toast) {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+          if (toast) toast.style.display = 'none';
+        }, 250);
+      }
+    }, durationMs);
   }
 }

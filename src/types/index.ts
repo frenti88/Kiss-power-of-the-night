@@ -203,6 +203,7 @@ export interface SaveData {
     masterVolume: number;
     musicVolume: number;
     sfxVolume: number;
+    musicMuted?: boolean;
   };
 }
 
